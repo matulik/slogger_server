@@ -14,11 +14,11 @@ class Application(models.Model):
     token = models.CharField(blank=False, max_length=40, db_column=u'TOKEN')
     users = models.ManyToManyField(User, db_column=u'USERS')
 
-    def __init__(self, name, users, *args, **kwargs):
-        super(Application, self).__init__(*args, **kwargs)
+    def create(self, name, users):
         self.name = name
         self.token = self.generatetoken()
         self.users = users
+        self.save()
 
     def generatetoken(self):
         token = self.name + str(time())
