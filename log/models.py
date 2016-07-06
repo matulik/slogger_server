@@ -19,7 +19,7 @@ class LogType(object):
 # Default log class
 class DefaultLog(models.Model):
     application = models.ForeignKey(Application, blank=False, db_column=u'APPLICATION')
-    addedDateTime = models.DateTimeField(blank=False, editable=False, default=time(), db_column=u'ADDEDDATETIME')
+    addedDateTime = models.CharField(blank=False, editable=False, max_length=13, default=time(), db_column=u'ADDEDDATETIME')
     logValue = models.TextField()
     logType = models.IntegerField(max_length=1, blank=False, default=LogType.STANDARD, db_column=u'LOGTYPE')
 

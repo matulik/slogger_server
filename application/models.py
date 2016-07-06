@@ -10,19 +10,49 @@ from hashlib import sha1
 
 
 class Application(models.Model):
-    name = models.CharField(blank=False, max_length=40, db_column=u'APP_NAME')
+    appName = models.CharField(blank=False, unique=True, max_length=40, db_column=u'APP_NAME')
+    createdDate = models.CharField(blank=False, editable=False, max_length=13, db_column=u'CREATEDDATE')
     token = models.CharField(blank=False, max_length=40, db_column=u'TOKEN')
-    users = models.ManyToManyField(User, db_column=u'USERS')
+    users = models.ForeignKey(User, db_column=u'USERS')
 
     def create(self, name, users):
-        self.name = name
-        self.token = self.generatetoken()
-        self.users = users
-        self.save()
+        _time = time()
 
-    def generatetoken(self):
-        token = self.name + str(time())
-        return sha1(token.encode('utf8')).hexdigest()
+        self.name = name
+        self.createdDate = _time
+        self.users = users
+        self.token = Application.generatetoken(name, _time)
+
+        self.save()
 
     def adduser(self, user):
         self.users.add(user)
+
+    @staticmethod
+    def generatetoken(name, time):
+        token = name + str(time)
+        return sha1(token.encode('utf8')).hexdigest()
+
+    @staticmethod
+    def authorize(request):
+        if request.method != 'POST':
+            return False
+
+        try:
+            appName = request.POST['APPNAME']
+            token = request.META['HTTP_TOKEN']
+        except KeyError:
+            return False
+
+        if not token or not appName:
+            return False
+
+        try:
+            authApp = Application.objects.get(appName=appName)
+        except Application.DoesNotExist or Application.MultipleObjectsReturned:
+            return False
+
+        if authApp.token == token:
+            return True
+        else:
+            return False

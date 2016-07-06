@@ -16,6 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from api import views as api
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
+    # API
+    url(r'^api/addLogDefault/$', api.addDefaultLog),
 ]
