@@ -1,0 +1,5 @@
+#Pycharm folder
+.idea/
+
+#Python compiled files
+*.pyc
