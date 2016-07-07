@@ -26,7 +26,10 @@ class DefaultLog(models.Model):
     def create(self, application, logValue, logType):
         self.application = application
         self.logValue = logValue
+        if logType < 0 or logType > 2:
+            return False
         self.logType = logType
         self.save()
+        return True
 
 
