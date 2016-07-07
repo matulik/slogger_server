@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}slogger - applist{% endblock title %}
+
+{% block content %}
+    {% for app in apps %}
+        {{ app.appName }} - {{ app.token }} - {{ app.createdDate }} - <a href="/web/log/default/{{ app.id }}">Default log</a>
+    {% endfor %}
+
+{% endblock content %}

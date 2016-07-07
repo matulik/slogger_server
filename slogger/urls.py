@@ -17,10 +17,18 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from api import views as api
+from web import views as web
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     # API
     url(r'^api/addLogDefault/$', api.addDefaultLog),
+
+    # WEB
+    url(r'^web/$', web.home),
+    url(r'^web/login/$', web.home),
+    url(r'^web/logout/$', web.logout_view),
+    url(r'^web/applist/$', web.applist),
+
 ]

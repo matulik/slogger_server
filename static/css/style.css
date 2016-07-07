@@ -1,0 +1,22 @@
+body {
+    background-color: cyan;
+     font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.login-header {
+    text-align: center;
+    font-weight: bold;
+}
+
+.login-form {
+    text-align: center;
+    width: 10%;
+    min-width: 200px;
+    margin: 0 auto;
+}
+
+.login-msg {
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+}
