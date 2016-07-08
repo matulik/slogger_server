@@ -4,7 +4,7 @@
 
 {% block content %}
     {% for app in apps %}
-        {{ app.appName }} - {{ app.token }} - {{ app.createdDate }} - <a href="/web/log/default/{{ app.id }}">Default log</a>
+        {{ app.appName }} - {{ app.token }} - {{ app.createdDate }} - <a href="/web/defaultlog/{{ app.id }}">Default log</a>
     {% endfor %}
 
 {% endblock content %}

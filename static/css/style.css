@@ -20,3 +20,15 @@ body {
     font-weight: bold;
     font-size: 12px;
 }
+
+.dynatable {
+    padding: 20px 20px 20px 20px;
+}
+
+.table_logValue {
+    min-width: 70%;
+}
+
+.table_id {
+    width: 50px;
+}

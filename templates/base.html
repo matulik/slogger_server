@@ -5,10 +5,13 @@
     <link rel="stylesheet" href="{% static 'css/pure-min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+    {% block head %}
+    {% endblock head %}
+
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock title %}</title>
 </head>
-<body>
+<body onload="{% block body_onload %}{% endblock body_onload %}">
     {% block content %}
     {% endblock content %}
 </body>

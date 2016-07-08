@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 from time import time
+from datetime import datetime
 
 from application.models import Application
 
@@ -26,16 +27,20 @@ class DefaultLog(models.Model):
     def as_json(self):
         return {
             "id": self.id,
-            "addedDateTime": self.addedDateTime,
+            "addedDateTime": datetime.fromtimestamp(float(self.addedDateTime)).strftime('%Y-%m-%d %H:%M:%S'),
             "logType": self.logType,
             "logValue": self.logValue
         }
 
     def create(self, application, logValue, logType):
+        try:
+            logValueInt = int(logType)
+        except:
+            return False
+        if logValueInt < 0 or logValueInt > 2:
+            return False
         self.application = application
         self.logValue = logValue
-        if logType < 0 or logType > 2:
-            return False
         self.logType = logType
         self.save()
         return True

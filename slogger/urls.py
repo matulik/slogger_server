@@ -26,12 +26,13 @@ urlpatterns = [
     url(r'^api/addLogDefault/$', api.addDefaultLog),
 
     # API-WEB
-    url(r'^web/log/default/(?P<id>[0-9]+)/$', api.appDefaultLogs),
+    url(r'^api/log/default/(?P<id>[0-9]+)/$', api.appDefaultLogs),
 
     # WEB
     url(r'^web/$', web.home),
     url(r'^web/login/$', web.home),
     url(r'^web/logout/$', web.logout_view),
     url(r'^web/applist/$', web.applist),
+    url(r'^web/defaultlog/(?P<id>[0-9]+)/$', web.defaultlog),
 
 ]

@@ -67,10 +67,11 @@ def appDefaultLogs(request, id):
         return JSONResponse(Response.BADREQUEST)
 
     queryLogs = DefaultLog.objects.filter(application=app).order_by('-addedDateTime')
+
     if queryLogs:
-        queryJSON = serialize('json', queryLogs)
-        return HttpResponse(queryJSON, content_type='json', status=Response.OK)
+        queryTab = []
+        for log in queryLogs:
+            queryTab.append(log.as_json())
+        return JsonResponse(queryTab, safe=False)
     else:
-        return JsonResponse(json, safe=False, status=Response.NOCONTENT)
-
-
+        return JSONResponse(Response.NOCONTENT)

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden, HttpResponseBadRequest
 
 from application.models import Application
 
@@ -34,4 +35,16 @@ def logout_view(request):
 def applist(request):
     apps = Application.objects.filter(users=request.user)
     return render(request, 'applist.html', {'apps': apps})
+
+@login_required
+def defaultlog(request, id):
+    try:
+        app = Application.objects.get(id=id)
+    except Application.DoesNotExist or Application.MultipleObjectsReturned:
+        return HttpResponseBadRequest
+
+    if app.users != request.user:
+        return HttpResponseForbidden
+
+    return render(request, 'defaultlogs.html', {'id': id})
 

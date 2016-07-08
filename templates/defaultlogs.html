@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.dynatable.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dynatable.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/defaultlogs.js' %}"></script>
+{% endblock head %}
+
+{% block title %}slogger - defaultlogs{% endblock title %}
+
+{% block body_onload %}loadData({{ id }}){% endblock body_onload %}
+
+{% block content %}
+    <div class="dynatable">
+    <table class="pure-table" id="dynamic_table">
+        <thead>
+        <th data-dynatable-column="id">ID</th>
+        <th data-dynatable-column="addedDateTime">Datetime</th>
+        <th data-dynatable-column="logType">Log type</th>
+        <th class="logValue" data-dynatable-column="logValue">Log value</th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    </div>
+
+{% endblock content %}
