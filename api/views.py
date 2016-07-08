@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from django.core.serializers import serialize
+import json
 
 from application.models import Application
 from log.models import DefaultLog
@@ -10,6 +13,7 @@ class Response(object):
     OK = 200
     UNAUTHORIZED = 401
     BADREQUEST = 400
+    NOCONTENT = 204
 
     @staticmethod
     def getMessage(statusCode):
@@ -19,6 +23,8 @@ class Response(object):
             return u'Unauthorized'
         if statusCode == Response.BADREQUEST:
             return u'Bad request'
+        if statusCode == Response.NOCONTENT:
+            return u'No content'
 
 
 def JSONResponse(response):
@@ -51,3 +57,20 @@ def addDefaultLog(request):
 
     else:
         return JSONResponse(Response.UNAUTHORIZED)
+
+
+@login_required
+def appDefaultLogs(request, id):
+    try:
+        app = Application.objects.get(id=id)
+    except Application.DoesNotExist or Application.MultipleObjectsReturned:
+        return JSONResponse(Response.BADREQUEST)
+
+    queryLogs = DefaultLog.objects.filter(application=app).order_by('-addedDateTime')
+    if queryLogs:
+        queryJSON = serialize('json', queryLogs)
+        return HttpResponse(queryJSON, content_type='json', status=Response.OK)
+    else:
+        return JsonResponse(json, safe=False, status=Response.NOCONTENT)
+
+

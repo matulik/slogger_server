@@ -23,6 +23,14 @@ class DefaultLog(models.Model):
     logValue = models.TextField()
     logType = models.IntegerField(max_length=1, blank=False, default=LogType.STANDARD, db_column=u'LOGTYPE')
 
+    def as_json(self):
+        return {
+            "id": self.id,
+            "addedDateTime": self.addedDateTime,
+            "logType": self.logType,
+            "logValue": self.logValue
+        }
+
     def create(self, application, logValue, logType):
         self.application = application
         self.logValue = logValue

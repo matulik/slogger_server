@@ -22,8 +22,11 @@ from web import views as web
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    # API
+    # API-TOKEN
     url(r'^api/addLogDefault/$', api.addDefaultLog),
+
+    # API-WEB
+    url(r'^web/log/default/(?P<id>[0-9]+)/$', api.appDefaultLogs),
 
     # WEB
     url(r'^web/$', web.home),
