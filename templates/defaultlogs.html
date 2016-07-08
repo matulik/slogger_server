@@ -13,7 +13,10 @@
 {% block body_onload %}loadData({{ id }}){% endblock body_onload %}
 
 {% block content %}
-    <div class="dynatable">
+    <div class="content">
+
+    <h1>Default logs - {{ appname }}</h1>
+
     <table class="pure-table" id="dynamic_table">
         <thead>
         <th data-dynatable-column="id">ID</th>

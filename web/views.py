@@ -46,5 +46,5 @@ def defaultlog(request, id):
     if app.users != request.user:
         return HttpResponseForbidden
 
-    return render(request, 'defaultlogs.html', {'id': id})
+    return render(request, 'defaultlogs.html', {'id': id, 'appname': app.appName})
 
