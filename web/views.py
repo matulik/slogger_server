@@ -48,3 +48,27 @@ def defaultlog(request, id):
 
     return render(request, 'defaultlogs.html', {'id': id, 'appname': app.appName})
 
+@login_required
+def addapp(request):
+    badNameError = u'Bad application name'
+    anyError = u'Error. Please try again.'
+
+    if request.method == 'POST':
+        try:
+            appname = request.POST['appname']
+        except KeyError:
+            return render(request, 'addapp.html', {'msg': badNameError})
+        if len(appname) == 0:
+            return render(request, 'addapp.html', {'msg': badNameError})
+
+        user = request.user
+        newApp = Application()
+        newApp.create(appname, user)
+        return redirect('/web/applist/')
+    else:
+        return render(request, 'addapp.html', {'msg': anyError})
+
+
+
+
+

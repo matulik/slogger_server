@@ -1,6 +1,6 @@
 body {
     background-color: cyan;
-     font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .login-header {
@@ -25,7 +25,12 @@ body {
     padding: 20px 20px 20px 20px;
 }
 
-.content-applist {
+.applist-leftmenu {
+    margin-top: 40px;
+    display: inline-block;
+}
+
+.applist-content {
     margin-left: 20px;
     margin-top: 20px;
 }

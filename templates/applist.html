@@ -3,11 +3,9 @@
 {% block title %}slogger - applist{% endblock title %}
 
 {% block content %}
+    <h1>Application list</h1>
 
-    <div class="content-applist">
-        <h1>Application list</h1>
-
-        <table class="pure-table">
+    <table class="pure-table">
         <thead>
         <th>Application name</th>
         <th>Secure key</th>
@@ -17,13 +15,13 @@
         <tbody>
         {% for app in apps %}
             <tr>
-                <td>app.appName</td>
-                <td>app.token</td>
-                <td>app.createdDate</td>
+                <td>{{ app.appName }}</td>
+                <td>{{ app.token }}</td>
+                <td>{{ app.getFormatedCreatedDate }}</td>
                 <td><a href="/web/defaultlog/{{ app.id }}">Default log</a></td>
             </tr>
         {% endfor %}
         </tbody>
-        </table>
+    </table>
     </div>
 {% endblock content %}

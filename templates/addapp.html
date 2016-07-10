@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}slogger - addapp{% endblock title %}
+
+{% block content %}
+    <h1>Add application</h1>
+
+    <div class="login-form">
+        <form action="/web/addapp/" class="pure-form" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="appname">Application name<br><i>(e.g. bundle id)</i></label>
+                <input name="appname" id="appname" type="text" placeholder="Application name">
+            </div>
+
+            <br>
+            <input type="submit" class="btn btn-default btn-change" value="Add">
+        </form>
+    </div>
+
+    <div class="login-msg">
+        {{ msg }}
+    </div>
+
+{% endblock content %}

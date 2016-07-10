@@ -6,11 +6,12 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from time import time
+from datetime import datetime
 from hashlib import sha1
 
 
 class Application(models.Model):
-    appName = models.CharField(blank=False, unique=True, max_length=40, db_column=u'APP_NAME')
+    appName = models.CharField(blank=False, max_length=40, db_column=u'APP_NAME')
     createdDate = models.CharField(blank=False, editable=False, max_length=13, db_column=u'CREATEDDATE')
     token = models.CharField(blank=False, max_length=40, db_column=u'TOKEN')
     users = models.ForeignKey(User, db_column=u'USERS')
@@ -18,7 +19,7 @@ class Application(models.Model):
     def create(self, name, users):
         _time = time()
 
-        self.name = name
+        self.appName = name
         self.createdDate = _time
         self.users = users
         self.token = Application.generatetoken(name, _time)
@@ -27,6 +28,9 @@ class Application(models.Model):
 
     def adduser(self, user):
         self.users.add(user)
+
+    def getFormatedCreatedDate(self):
+        return datetime.fromtimestamp(float(self.createdDate)).strftime('%Y-%m-%d %H:%M:%S')
 
     @staticmethod
     def generatetoken(name, time):

@@ -34,5 +34,6 @@ urlpatterns = [
     url(r'^web/logout/$', web.logout_view),
     url(r'^web/applist/$', web.applist),
     url(r'^web/defaultlog/(?P<id>[0-9]+)/$', web.defaultlog),
+    url(r'^web/addapp/$', web.addapp),
 
 ]
