@@ -58,7 +58,6 @@ def addDefaultLog(request):
     else:
         return JSONResponse(Response.UNAUTHORIZED)
 
-
 @login_required
 def appDefaultLogs(request, id):
     try:

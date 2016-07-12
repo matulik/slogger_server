@@ -1,5 +1,5 @@
-// $(document).ready(function () {
-//     loadData();
+// $( document ).ready(function() {
+//
 // });
 
 function loadData(id) {

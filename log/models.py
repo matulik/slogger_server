@@ -28,7 +28,8 @@ class DefaultLog(models.Model):
         return {
             "id": self.id,
             "addedDateTime": datetime.fromtimestamp(float(self.addedDateTime)).strftime('%Y-%m-%d %H:%M:%S'),
-            "logType": self.logType,
+            "logTypeID": self.logType,
+            "logTypeName": self.getLogTypeName(),
             "logValue": self.logValue
         }
 
@@ -44,5 +45,13 @@ class DefaultLog(models.Model):
         self.logType = logType
         self.save()
         return True
+
+    def getLogTypeName(self):
+        if self.logType == LogType.STANDARD:
+            return u'STANDARD'
+        elif self.logType == LogType.FATAL:
+            return u'FATAL'
+        elif self.logType == LogType.REQUEST:
+            return u'REQUEST'
 
 
