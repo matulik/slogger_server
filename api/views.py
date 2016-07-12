@@ -37,9 +37,9 @@ def addDefaultLog(request):
     if Application.authorize(request):
 
         try:
+            appName = request.META['HTTP_APPNAME']
             logValue = request.POST['LOGVALUE']
             logType = request.POST['LOGTYPE']
-            appName = request.POST['APPNAME']
         except KeyError:
             return JSONResponse(Response.BADREQUEST)
 

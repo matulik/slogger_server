@@ -43,7 +43,7 @@ class Application(models.Model):
             return False
 
         try:
-            appName = request.POST['APPNAME']
+            appName = request.META['HTTP_APPNAME']
             token = request.META['HTTP_TOKEN']
         except KeyError:
             return False
